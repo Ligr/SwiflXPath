@@ -7,7 +7,7 @@ public final class SwiftXPath {
 
     public init?(xml: String) {
         guard let doc = xml.cString(using: .utf8)!.withUnsafeBufferPointer({
-            xmlReadMemory($0.baseAddress, numericCast($0.count), nil, nil, Int32(XML_PARSE_RECOVER.rawValue))
+            xmlReadMemory($0.baseAddress, numericCast($0.count), nil, "utf-8", Int32(XML_PARSE_RECOVER.rawValue))
         }) else {
             return nil
         }
@@ -16,7 +16,7 @@ public final class SwiftXPath {
 
     public init?(html: String) {
         guard let doc = html.cString(using: .utf8)!.withUnsafeBufferPointer({
-            htmlReadMemory($0.baseAddress, numericCast($0.count), nil, nil, Int32(HTML_PARSE_NOBLANKS.rawValue | HTML_PARSE_NOERROR.rawValue | HTML_PARSE_NOWARNING.rawValue | HTML_PARSE_NONET.rawValue | HTML_PARSE_NOIMPLIED.rawValue))
+            htmlReadMemory($0.baseAddress, numericCast($0.count), nil, "utf-8", Int32(HTML_PARSE_NOBLANKS.rawValue | HTML_PARSE_NOERROR.rawValue | HTML_PARSE_NOWARNING.rawValue | HTML_PARSE_NONET.rawValue | HTML_PARSE_NOIMPLIED.rawValue))
         }) else {
             return nil
         }
